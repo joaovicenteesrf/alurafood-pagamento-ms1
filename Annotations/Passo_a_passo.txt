@@ -1,0 +1,11 @@
+Aqui será mostrado o passo a passo da criação do projeto.
+
+
+1 - Iniciar o projeto utilizando Spring Initializr com todas as dependências listadas no POM.
+
+2 - Criar a model:
+    A model Pagamento foi criada, e a mesma se conectará ao banco. O plugin Lombok ajudou a deixar a classe enxuta, criando
+    automaticamente getters, setters e construtores. Diversas validações também foram postas a todos os atributos, sempre
+    em forma de annotations.
+
+3 -

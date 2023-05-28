@@ -1,0 +1,30 @@
+O REST (Representational State Transfer) é um estilo arquitetural utilizado no desenvolvimento de sistemas distribuídos
+na web. Ele define um conjunto de princípios e restrições que permitem a criação de APIs (Application Programming
+Interfaces) que são eficientes, escaláveis, interoperáveis e fáceis de entender.
+
+Na arquitetura REST, os recursos são expostos através de URLs (Uniform Resource Locators) bem definidas. Cada recurso é
+identificado por um URI (Uniform Resource Identifier) único, e as operações são realizadas através dos métodos HTTP,
+como GET, POST, PUT e DELETE.
+
+Os princípios fundamentais do REST são:
+
+1. Cliente-servidor: Existe uma separação clara entre o cliente, que faz requisições, e o servidor, que processa essas
+requisições e fornece as respostas.
+
+2. Stateless (sem estado): Cada requisição enviada pelo cliente para o servidor contém todas as informações necessárias
+para que o servidor compreenda e processe a requisição. O servidor não guarda informações sobre o estado do cliente
+entre requisições. Isso permite que o servidor seja escalável e não dependa do contexto das requisições anteriores.
+
+3. Cache: As respostas do servidor podem ser armazenadas em cache no cliente ou em intermediários (como proxies) para
+melhorar a eficiência e reduzir a carga no servidor. O cache é baseado na utilização de cabeçalhos HTTP adequados.
+
+4. Interface uniforme: O REST define uma interface uniforme entre o cliente e o servidor, que inclui o uso de métodos HTTP
+bem conhecidos (GET, POST, PUT, DELETE) e a manipulação de recursos através de URLs. Isso torna a interação entre
+sistemas fácil de entender e permite que diferentes partes do sistema evoluam independentemente.
+
+5. Sistema em camadas: O sistema REST pode ser organizado em camadas, onde cada camada tem conhecimento apenas das
+camadas adjacentes. Isso permite que componentes intermediários, como proxies e balanceadores de carga, sejam inseridos
+na arquitetura para melhorar o desempenho, a segurança e a escalabilidade.
+
+Ao seguir esses princípios e restrições, o REST permite que diferentes sistemas se comuniquem de forma eficiente e
+flexível, tornando-se um padrão amplamente adotado para o desenvolvimento de APIs na web.

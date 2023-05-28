@@ -1,0 +1,53 @@
+O que é Load Balancer?
+
+O load balancer, ou balanceador de carga, é um componente fundamental em arquiteturas de computação em rede que distribui
+o tráfego entre vários servidores ou recursos computacionais para otimizar o desemprenho, aumentar a confiabilidade e
+garantir a disponibilidade de um sistema.
+
+O objetivo principal de um load balancer é evitar sobrecarregar qualquer servidor ou recurso individual, garantindo que
+a carga de trabalho seja distribuída de forma equilibrada. Isso é especialmente importante em ambientes onde há um alto
+volume de tráfego, como sites populares, aplicativos da web, serviços em nuvem ou qualquer sistema que lide com solicitações
+intensivas.
+
+Existem diferentes tipos de load balancers, incluindo balanceadores de carga baseados em hardware e software.
+
+Os balanceadores de carga podem utilizar algoritmos para tomar decisões sobre como distribuir as cargas, como o Round
+Robin (cada servidor recebe uma solicitação por vez em uma sequência circular) ou baseado em ponderação (os servidores
+recebem diferentes níveis de carga com base em suas capacidades).
+
+Além de distribuir o tráfego, os load balancers também podem realizar verificações de integridade dos servidores, monitorar
+seu desempenho e redirecionar as solicitações para servidores alternativos caso um deles falhe. Isso ajuda a garantir alta
+disponibilidade e confiabilidade dos sistemas.
+
+No geral, um load balancer desempenha um papel crucial em otimizar a utilização de recursos, melhorar o tempo de resposta,
+evitar sobrecargas e manter a estabilidade de sistemas distribuídos ou de alta demanda.
+
+
+
+E como o load balancer funciona na AWS?
+
+Na Amazon Web Services (AWS), o serviço de balanceamento de carga é fornecido pelo Elastic Load Balancing (ELB). O ELB
+é um serviço gerenciado que distribui automaticamente o tráfego de entrada entre várias instâncias de EC2
+(Elastic Compute Cloud) ou outros recursos, como contêineres do Amazon ECS (Elastic Container Service) ou instâncias do
+Amazon RDS (Relational Database Service).
+
+Existem três tipos principais de load balancers oferecidos pela AWS:
+
+1. Classic Load Balancer (CLB): É o serviço de balanceamento de carga original da AWS, que oferece balanceamento de
+carga em camada de transporte (TCP/SSL) e camada de aplicativo (HTTP/HTTPS). Ele distribui o tráfego entre as instâncias
+EC2 com base em informações de IP e porta.
+
+2. Application Load Balancer (ALB): É um balanceador de carga de camada de aplicativo que opera na camada de aplicativo
+(HTTP/HTTPS) e fornece funcionalidades avançadas para roteamento de tráfego com base em regras, como roteamento baseado
+em conteúdo, redirecionamentos e integração com serviços da AWS, como o Amazon ECS e o AWS Lambda.
+
+3. Network Load Balancer (NLB): É um balanceador de carga de camada de transporte (TCP/UDP) de alto desempenho que opera
+ na camada de transporte. Ele é projetado para lidar com tráfego intenso e oferece desempenho ultrabaixo de latência.
+ O NLB é adequado para casos de uso em que é necessário lidar com milhões de solicitações por segundo, como jogos,
+ streaming de mídia e serviços de internet das coisas (IoT).
+
+Ao configurar um load balancer na AWS, você precisa criar um balanceador de carga na região desejada e definir a
+configuração, como o tipo de balanceador de carga, as zonas de disponibilidade onde as instâncias serão implantadas,
+o protocolo de escuta, as regras de roteamento e assim por diante. Depois de configurado, o load balancer gerencia
+automaticamente a distribuição de tráfego e o monitoramento da saúde das instâncias para fornecer alta disponibilidade
+e escalabilidade aos seus aplicativos na nuvem.

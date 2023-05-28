@@ -1,0 +1,84 @@
+EXPLICANDO DE MANEIRA SIMPLES: ///////////////////////////////////////////////////////////////////////////////////////
+
+Imagina que você tem um brinquedo muito grande, com muitas peças. Cada peça desse brinquedo faz uma coisa específica,
+como girar, apitar ou acender luzes. Agora, em vez de ter um único brinquedo grande, você separa todas as peças em
+brinquedos menores.
+
+Cada brinquedo menor é como um microsserviço. Cada um faz uma tarefa bem específica, e você pode brincar com eles
+separadamente. Se você quiser que o brinquedo faça algo diferente, você pode trocar um dos brinquedos menores por
+outro que faça aquela nova tarefa.
+
+Microsserviços são como peças de um brinquedo. Em vez de ter um único programa de computador grande que faz tudo, como
+um brinquedo grande, você divide o programa em partes menores e independentes, cada uma com sua função específica.
+
+Essas partes menores, os microsserviços, podem ser facilmente trocados ou atualizados sem afetar as outras partes. Isso
+torna o sistema mais flexível e fácil de gerenciar.
+
+Assim como você pode montar diferentes brinquedos com as peças separadas, os microsserviços podem ser combinados de
+diferentes maneiras para criar aplicativos e serviços de software. Eles ajudam os desenvolvedores a construir sistemas
+mais flexíveis, escaláveis e fáceis de manter.
+
+
+
+
+
+EXPLICAÇÃO TÉCNICA: ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Os microsserviços são uma arquitetura de desenvolvimento de software em que um aplicativo é dividido em componentes
+independentes e autônomos, conhecidos como microsserviços. Cada microsserviço é responsável por uma única função
+específica dentro do aplicativo e se comunica com os outros microsserviços por meio de APIs (Interfaces de Programação
+de Aplicativos).
+
+
+
+
+
+
+CARACTERÍSTICAS DOS MICROSSERVIÇOS: ///////////////////////////////////////////////////////////////////////////////////
+
+1. Separação de responsabilidades: Cada microsserviço é responsável por uma tarefa específica do aplicativo.
+Por exemplo, um microsserviço pode ser responsável pelo gerenciamento de usuários, outro pelo processamento de
+pagamentos e assim por diante. Essa abordagem ajuda a manter a base de código menor e mais focada, facilitando o
+desenvolvimento e a manutenção.
+
+2. Comunicação via APIs: Os microsserviços se comunicam uns com os outros por meio de APIs. Eles expõem suas
+funcionalidades por meio de interfaces bem definidas, permitindo que outros microsserviços solicitem dados ou
+executem ações específicas. Essa comunicação é geralmente baseada em protocolos como HTTP/REST ou mensageria assíncrona.
+
+3. Escalabilidade independente: Como cada microsserviço é uma entidade independente, é possível dimensionar e ajustar
+a capacidade de cada um de forma independente. Isso permite uma melhor utilização dos recursos, já que apenas os
+microsserviços que estão sob maior demanda precisam ser dimensionados, enquanto outros podem permanecer com capacidade
+menor.
+
+4. Implantação e atualização independentes: Os microsserviços podem ser implantados e atualizados separadamente.
+Isso significa que as equipes de desenvolvimento podem trabalhar em diferentes microsserviços sem afetar os outros.
+Além disso, é possível adotar abordagens de implantação contínua, lançando atualizações em um microsserviço específico
+sem interromper o funcionamento dos outros.
+
+5. Tolerância a falhas: Devido à sua natureza distribuída, os microsserviços são projetados para serem resilientes a
+falhas. Se um microsserviço apresentar problemas, os outros ainda podem continuar funcionando normalmente. Além disso,
+é possível implementar estratégias de monitoramento e recuperação para lidar com falhas e garantir a disponibilidade e
+confiabilidade do sistema como um todo.
+
+Os microsserviços oferecem flexibilidade, escalabilidade e modularidade aos aplicativos, permitindo que as equipes de
+desenvolvimento construam sistemas complexos de forma mais eficiente. No entanto, também trazem desafios adicionais,
+como o gerenciamento da comunicação entre os microsserviços e a garantia da consistência dos dados em um ambiente
+distribuído.
+
+
+
+
+
+
+
+QUAIS SÃO AS DESVANTAGENS DO USO DE MICROSSERVIÇOS? ///////////////////////////////////////////////////////////////////
+
+- Maior complexidade de desenvolvimento e infraestrutura
+
+- Debug mais complexo
+
+- Comunicação entre os serviços deve ser bem pensada
+
+- Diversas tecnologias em conjunto pode ser um problema
+
+- Monitoramento é crucial e mais complexo
