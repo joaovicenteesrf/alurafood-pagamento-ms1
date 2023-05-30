@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /*
 Anotação @Entity para identificar que a classe será ligada ao banco. Caso a anotação não especifique o banco a ser utilizado,
 ele chamará o banco que tem exatamente o mesmo nome da classe. A anotação @Table especifica a tabela a ser utilizada.

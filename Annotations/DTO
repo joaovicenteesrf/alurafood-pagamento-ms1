@@ -1,0 +1,44 @@
+Em Spring, uma classe DTO (Data Transfer Object) é uma classe simples que é usada para transportar dados entre
+diferentes camadas ou componentes de um aplicativo. Ela é especialmente útil quando você precisa transferir dados entre
+a camada de apresentação (como a interface do usuário) e a camada de serviços ou persistência.
+
+A classe DTO geralmente contém apenas campos de dados (atributos) e métodos getter e setter para acessar esses campos.
+Os campos representam os dados que precisam ser transferidos e podem corresponder a partes de uma entidade de domínio
+ou a uma combinação de várias entidades.
+
+A principal razão para usar DTOs é separar a lógica de negócios da estrutura dos dados. Ao invés de transferir
+diretamente as entidades de domínio (que podem conter mais informações do que o necessário ou ter relacionamentos
+complexos) entre as camadas, você pode criar classes DTO mais leves e mais específicas para atender às necessidades
+de cada camada.
+
+Isso oferece algumas vantagens. Primeiro, você pode selecionar apenas os campos relevantes para uma determinada
+operação, reduzindo a quantidade de dados transferidos pela rede e melhorando o desempenho. Além disso, os DTOs podem
+ser usados para ocultar detalhes internos do sistema, protegendo a integridade dos dados e fornecendo uma visão
+simplificada para os consumidores externos.
+
+No contexto do Spring, os DTOs são frequentemente usados em conjunto com as anotações de mapeamento, como @RequestBody
+e @ResponseBody, para realizar a conversão automática entre os objetos DTO e os formatos de dados de entrada/saída,
+como JSON.
+
+Em resumo, uma classe DTO em Spring é uma classe simples usada para transferir dados entre diferentes camadas ou
+componentes de um aplicativo. Ela separa a lógica de negócios da estrutura dos dados e permite a transferência de
+informações específicas e simplificadas entre as partes do sistema.
+
+
+
+Explicação da Alura: /////////////////////////////////////////////////
+
+Data Transfer Object (DTO) ou Objeto de Transferência de Dados, em português, é um padrão de projeto muito usado para o
+transporte de dados entre diferentes componentes de um sistema, diferentes instâncias ou processos de um sistema
+distribuído.
+
+A ideia consiste basicamente em agrupar um conjunto de atributos em uma classe simples, de forma a otimizar a comunicação,
+ bem como proteger para que alguns atributos não sejam serializados e devolvidos como resposta pelo nosso controlador,
+ por exemplo.
+
+Vamos imaginar uma classe de modelo que representa os produtos, na qual eu tenho vários atributos como descrição, valor,
+ preço de custo, fornecedor, além de algumas regras de negócio e métodos. Ao devolver os dados para o controlador,
+ não quero exibir todas essas informações, mas sim, somente alguns atributos, como código, descrição e valor. Nesse
+ caso, não preciso devolver meu objeto de domínio, tenho a flexibilidade de criar uma nova classe, ou seja, um objeto
+ de transferência de dados exclusivamente com esse dados e devolvê-lo na requisição, somente com esses atributos,
+ protegendo assim o acesso aos outros.

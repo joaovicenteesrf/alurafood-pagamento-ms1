@@ -8,4 +8,54 @@ Aqui será mostrado o passo a passo da criação do projeto.
     automaticamente getters, setters e construtores. Diversas validações também foram postas a todos os atributos, sempre
     em forma de annotations.
 
-3 -
+3 - Criar o repository:
+    O repository é um pacote que guarda as interfaces da model, no caso do projeto há a PagamentoRepository. Ela tem como
+    finalidade herdar a JpaRepository, que fará todos os métodos para um CRUD básico. Nos parâmetros são passadas a classe
+    model que receberá os atributos e o tipo da chave primária.
+
+4 - Criar a DTO da model:
+    Há um arquivo de texto mais específico para a DTO, mas basicamente são versões simplificadas da model, com apenas os
+    atributos e os métodos get e set. Elas são especialmente úteis por serem mais leves, e podem esconder detalhes que devem
+    permanecer ocultos no sistema, protegendo a integridade do sistema. Caso algum atributo da model deva permanecer escondido,
+    basta não declará-lo na DTO.
+
+5 - Criar a camada Service:
+    Dado que estamos construindo um microsserviço já considerando todas as boas práticas, não vamos incluir no nosso
+    controlador ou controller a regra de manipulação ao repositório, precisamos extrair isso para uma camada a parte que
+     chamamos, geralmente, de service.
+
+    Isso é feito porque o objetivo do controlador é receber uma requisição, delegar para alguém e só devolver a resposta,
+     não é para ele ter muitas coisas acontecendo ali, o ideal é que ele seja enxuto.
+
+    Então vamos criar um pacote de serviço e incluir os serviços básicos que vamos precisar, que é o de criar um
+    pagamento, atualizar, obter a lista de pagamentos.
+
+6 - Criar a controller:
+    A controller serve para mapear as requisições de diferentes tipos para as URL's corretas. Ela instancia a classe service,
+    onde estão todas as regras de manipulação do repositório.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Camadas:
+
+    Controller
+        |
+        |
+    Service
+        |
+        |
+    Repository
+        |
+        |
+    Model // DTO

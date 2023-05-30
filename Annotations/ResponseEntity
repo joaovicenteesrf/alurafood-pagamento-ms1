@@ -1,0 +1,39 @@
+A classe ResponseEntity em Spring é uma classe fornecida pelo framework que representa uma resposta HTTP personalizada.
+Ela encapsula o corpo da resposta, os cabeçalhos e o status HTTP que serão retornados por um controlador de endpoints.
+
+Ao lidar com requisições HTTP, é comum que um controlador precise retornar informações adicionais além do corpo da
+resposta, como cabeçalhos personalizados ou um status de resposta específico. A classe ResponseEntity é usada para
+fornecer essa flexibilidade.
+
+Normalmente, um controlador Spring retorna o corpo da resposta diretamente como um objeto Java, como uma instância de
+uma classe DTO. No entanto, ao usar a classe ResponseEntity, é possível personalizar a resposta ainda mais. Aqui está
+um exemplo simples:
+
+******************************************************************************************************
+@GetMapping("/exemplo")
+public ResponseEntity<String> exemplo() {
+    String corpoResposta = "Exemplo de resposta";
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Custom-Header", "Valor personalizado");
+
+    return ResponseEntity.ok()
+            .headers(headers)
+            .body(corpoResposta);
+}
+******************************************************************************************************
+
+Nesse exemplo, um controlador de endpoint recebe uma requisição GET em "/exemplo". Ele cria uma instância de
+ResponseEntity e a personaliza definindo o status como ok (200), adicionando um cabeçalho personalizado e definindo o
+corpo da resposta como uma string.
+
+No entanto, a classe ResponseEntity fornece uma ampla gama de métodos para personalizar a resposta HTTP, como status(),
+headers(), body(), ok(), notFound(), created(), entre outros. Esses métodos permitem definir o status da resposta,
+adicionar cabeçalhos, configurar o corpo da resposta e muito mais.
+
+O uso da classe ResponseEntity é útil em situações em que você precisa ter um controle mais granular sobre a resposta
+HTTP retornada pelo seu controlador, como ao definir um status personalizado, retornar cabeçalhos específicos ou
+manipular erros e exceções.
+
+Em resumo, a classe ResponseEntity em Spring é usada para personalizar as respostas HTTP retornadas por um controlador
+de endpoints. Ela permite definir o corpo da resposta, os cabeçalhos e o status da resposta de forma flexível e
+personalizada.

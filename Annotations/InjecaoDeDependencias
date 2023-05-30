@@ -1,0 +1,27 @@
+A injeção de dependências é um padrão de design e um conceito-chave no desenvolvimento de software. Ele se concentra na
+forma como os objetos colaboram entre si, buscando reduzir o acoplamento e aumentar a flexibilidade e a reutilização de
+código.
+
+Em um sistema orientado a objetos, é comum que as classes dependam de outras classes para realizar suas tarefas. Por
+exemplo, uma classe A pode precisar usar funcionalidades fornecidas por uma classe B para realizar uma determinada
+operação. O problema surge quando a classe A precisa criar uma instância da classe B dentro de si para ter acesso a
+essas funcionalidades. Essa abordagem cria um acoplamento rígido entre as duas classes, dificultando a manutenção e o
+teste individual dessas classes.
+
+A injeção de dependências aborda esse problema invertendo o controle da criação das dependências. Em vez de a classe A
+criar uma instância de B, a instância de B é fornecida à classe A por um mecanismo externo, que é geralmente um
+contêiner de IoC, como o Spring IoC Container. Essa instância de B é então "injetada" na classe A por meio de um
+construtor, um método ou uma propriedade.
+
+A principal vantagem da injeção de dependências é que ela desacopla as classes entre si, tornando-as independentes de
+como suas dependências são criadas. Isso facilita o teste unitário, pois as dependências podem ser substituídas por
+objetos de teste sem a necessidade de modificar o código da classe principal. Além disso, a injeção de dependências
+promove a reutilização de código, pois as dependências podem ser compartilhadas por várias classes.
+
+Existem diferentes formas de realizar a injeção de dependências: construtor, método setter e injeção de propriedades.
+No Spring, a abordagem mais comum é a injeção via construtor ou por meio de anotações, como @Autowired, que instruem
+o contêiner do Spring a injetar automaticamente as dependências corretas.
+
+Em resumo, a injeção de dependências é um padrão de design que permite desacoplar as classes entre si, promovendo
+a reutilização de código e facilitando o teste unitário. No contexto do Spring, o contêiner de IoC é responsável
+por criar e injetar automaticamente as dependências nos objetos gerenciados, como os beans.
