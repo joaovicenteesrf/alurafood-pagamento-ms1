@@ -3,21 +3,33 @@ Aqui será mostrado o passo a passo da criação do projeto.
 
 1 - Iniciar o projeto utilizando Spring Initializr com todas as dependências listadas no POM.
 
+
+
+
 2 - Criar a model:
     A model Pagamento foi criada, e a mesma se conectará ao banco. O plugin Lombok ajudou a deixar a classe enxuta, criando
     automaticamente getters, setters e construtores. Diversas validações também foram postas a todos os atributos, sempre
     em forma de annotations.
+
+
+
 
 3 - Criar o repository:
     O repository é um pacote que guarda as interfaces da model, no caso do projeto há a PagamentoRepository. Ela tem como
     finalidade herdar a JpaRepository, que fará todos os métodos para um CRUD básico. Nos parâmetros são passadas a classe
     model que receberá os atributos e o tipo da chave primária.
 
+
+
+
 4 - Criar a DTO da model:
     Há um arquivo de texto mais específico para a DTO, mas basicamente são versões simplificadas da model, com apenas os
     atributos e os métodos get e set. Elas são especialmente úteis por serem mais leves, e podem esconder detalhes que devem
     permanecer ocultos no sistema, protegendo a integridade do sistema. Caso algum atributo da model deva permanecer escondido,
     basta não declará-lo na DTO.
+
+
+
 
 5 - Criar a camada Service:
     Dado que estamos construindo um microsserviço já considerando todas as boas práticas, não vamos incluir no nosso
@@ -30,6 +42,9 @@ Aqui será mostrado o passo a passo da criação do projeto.
     Então vamos criar um pacote de serviço e incluir os serviços básicos que vamos precisar, que é o de criar um
     pagamento, atualizar, obter a lista de pagamentos.
 
+
+
+
 6 - Criar a controller:
     A controller serve para mapear as requisições de diferentes tipos para as URL's corretas. Ela instancia a classe service,
     onde estão todas as regras de manipulação do repositório.
@@ -38,6 +53,57 @@ Aqui será mostrado o passo a passo da criação do projeto.
 
 
 
+7 - Criar as migrations:
+    Em microsserviços há mais do que um banco de dados, em unidades independentes. O conceito de migrations é fazer esse
+    controle de como as bases de dados irão evoluir, guardar históricos, fazer reverts voltando para um estado anterior e
+    aplicar as alterações para todos os microsserviços.
+    A dependência Flyway cuida das migrations na aplicação. Quando o projeto é iniciado já com o Flyway como dependência,
+    na pasta resource é criado uma pasta db.migration. Dentro dessa pasta irão os arquivos SQL.
+    O padrão de nomes para os arquivos sql é "V{numero}__{nome do comando}.sql".
+    Exemplo: V1__criar_tabela_pagamentos.sql
+    Dentro dela irão os comandos SQL para criar a tabela, e assim que o projeto rodar, esses comandos serão executados.
+
+
+
+
+
+8 - Realizar as configurações para conectar com o banco de dados:
+    Nesse passo, é necessário adicionar ao application.properties as configurações do banco SQL.
+    Lá serão definidas algumas configurações, como a classe MySQL usada pelo JDBC, a url do banco de dados que queremos
+    criar, além do nome e senha do usuário.
+    Por último, uma configuração para mostrar no log quais comandos SQL estão sendo rodados, assim que o projeto é iniciado.
+    A tabela será criada no MySQL, mas um ponto de atenção é que ele cria 2 tabelas. A tabela escolhida e definida na migration,
+    e uma tabela chamada "flyway_schema_history". Essa tabela mostrará o histórico de scripts rodados, qual seu nome, data
+    de inserção e por quem foi feito. A partir dessa tabela ele sabe quais migrations já foram executadas, para não
+    executar novamente (tipo um data_patch).
+
+
+
+
+9 - Declarar os beans do ModelMapper:
+    Quando você usa a anotação @Autowired em um objeto no Spring, está indicando ao contêiner do Spring que ele deve
+    injetar automaticamente uma instância desse objeto. No entanto, se não houver um bean correspondente configurado no
+    contêiner do Spring, ocorrerá um erro.
+
+    A razão pela qual isso acontece é que o Spring precisa saber qual bean deve ser injetado em um determinado ponto de
+    injeção. Ele faz isso por meio de um processo chamado resolução de dependência. Quando você declara um objeto com
+    @Autowired, o contêiner do Spring verifica se existe um bean correspondente que pode ser injetado nesse ponto.
+    Se o bean não for encontrado, o contêiner não tem como saber qual objeto deve ser injetado e, portanto, ocorre um erro.
+
+    Uma pasta chamada config foi criada, e nela foi posta a classe Configuracao, que servirá para quaisquer configurações
+    de Bean; Há outras possibilidades, como criar em um arquivo xml.
+
+
+
+
+10 - Testar a aplicação e criar as requisições no postman:
+    As requisições estão no Postman, coleção "Alura Food". As requisições GET, POST, PUT e DELETE foram criadas.
+    O CRUD funciona perfeitamente.
+    Caso nos métodos que exijam um JSON, não seja informado algum campo, ocorrerá um erro. Isso acontece porque tanto os atributos
+    da DTO quanto as tabelas do campo são NOT NULL. Ou seja, no presente momento o cliente é OBRIGADO a utilizar um cartão de crédito
+    para comprar. Caso queira implementar outros métodos, essa alteração precisa ser feita.
+    Obs: Caso haja algum erro e apareça uma mensagem de erro gigante, é porque não há handlers no projeto nesse ponto.
+    Handlers são classes utilizadas para manipular mensagens de erro.
 
 
 

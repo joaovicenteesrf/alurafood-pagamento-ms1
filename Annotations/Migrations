@@ -1,0 +1,32 @@
+Na arquitetura de microsserviços, o conceito de "migrations" refere-se a uma abordagem para gerenciar alterações no
+esquema do banco de dados de forma controlada e automatizada.
+
+Quando você tem vários serviços que compartilham o mesmo banco de dados, é importante garantir que as alterações no
+esquema do banco de dados sejam aplicadas de maneira consistente em todos os microsserviços afetados. As migrations
+(migrações) ajudam a lidar com essa complexidade.
+
+As migrations permitem que você defina e versione as alterações no esquema do banco de dados como um conjunto de scripts
+executáveis. Cada migration representa uma única alteração no esquema, como criar uma tabela, adicionar uma coluna,
+alterar um índice, etc. Cada migration é associada a uma versão específica do seu aplicativo.
+
+Quando você implanta uma nova versão do seu serviço, o mecanismo de migrations verifica qual é a versão atual do banco
+de dados e executa automaticamente as migrations necessárias para atualizar o esquema para a versão desejada. Isso
+garante que todas as instâncias do serviço tenham o esquema de banco de dados correto e consistente.
+
+Existem várias ferramentas e frameworks que podem ajudar na implementação das migrations em um ambiente de microsserviços.
+Alguns exemplos populares incluem:
+
+Flyway: É uma biblioteca de migração de banco de dados que oferece suporte a várias tecnologias de banco de dados.
+Ele permite que você escreva scripts de migração em SQL puro ou em várias linguagens de programação, como Java,
+JavaScript, Python, etc.
+
+Liquibase: É outra biblioteca de migração de banco de dados que oferece suporte a vários bancos de dados. Ele permite
+que você defina as alterações no esquema usando XML, JSON, YAML ou SQL.
+
+Essas ferramentas fornecem uma maneira fácil de definir, versionar e executar as migrations. Além disso, elas
+geralmente oferecem recursos avançados, como a capacidade de desfazer ou reverter as migrations, executar as migrations
+em paralelo e integrar-se a processos de CI/CD (Integração Contínua/Entrega Contínua).
+
+Em resumo, as migrations na arquitetura de microsserviços são uma abordagem para gerenciar as alterações no esquema do
+banco de dados de forma controlada e automatizada. Elas ajudam a manter a consistência entre os serviços e permitem que
+você evolua o esquema do banco de dados de maneira incremental à medida que seu aplicativo se desenvolve.
