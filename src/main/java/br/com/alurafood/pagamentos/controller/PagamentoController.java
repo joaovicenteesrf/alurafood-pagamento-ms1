@@ -2,8 +2,6 @@ package br.com.alurafood.pagamentos.controller;
 
 import br.com.alurafood.pagamentos.dto.PagamentoDto;
 import br.com.alurafood.pagamentos.service.PagamentoService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 
 @RestController
@@ -26,20 +26,13 @@ public class PagamentoController {
         return service.obterTodos(paginacao);
     }
 
-    /*
-    A classe ResponseEntity em Spring é uma classe fornecida pelo framework que representa uma resposta HTTP personalizada.
-    Ela encapsula o corpo da resposta, os cabeçalhos e o status HTTP que serão retornados por um controlador de endpoints.
-
-    Ao lidar com requisições HTTP, é comum que um controlador precise retornar informações adicionais além do corpo da resposta,
-    como cabeçalhos personalizados ou um status de resposta específico. A classe ResponseEntity é usada para fornecer essa
-    flexibilidade.
-     */
     @GetMapping("/{id}")
     public ResponseEntity<PagamentoDto> detalhar(@PathVariable @NotNull Long id) {
         PagamentoDto dto = service.obterPorId(id);
 
         return ResponseEntity.ok(dto);
     }
+
 
     @PostMapping
     public ResponseEntity<PagamentoDto> cadastrar(@RequestBody @Valid PagamentoDto dto, UriComponentsBuilder uriBuilder) {
@@ -60,4 +53,5 @@ public class PagamentoController {
         service.excluirPagamento(id);
         return ResponseEntity.noContent().build();
     }
+
 }

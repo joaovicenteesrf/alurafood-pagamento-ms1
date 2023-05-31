@@ -1,21 +1,17 @@
 package br.com.alurafood.pagamentos.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-/*
-Anotação @Entity para identificar que a classe será ligada ao banco. Caso a anotação não especifique o banco a ser utilizado,
-ele chamará o banco que tem exatamente o mesmo nome da classe. A anotação @Table especifica a tabela a ser utilizada.
- */
 @Entity
 @Table(name = "pagamentos")
 @Getter
@@ -45,11 +41,11 @@ public class Pagamento {
     private String expiracao;
 
     @NotBlank
-    @Size(min = 3, max = 3)
+    @Size(min=3, max=3)
     private String codigo;
 
     @NotNull
-    @Enumerated(EnumType.STRING) // Identifica que a classe Status é um Enum, do tipo String
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @NotNull
@@ -57,4 +53,6 @@ public class Pagamento {
 
     @NotNull
     private Long formaDePagamentoId;
+
+
 }

@@ -107,6 +107,34 @@ Aqui será mostrado o passo a passo da criação do projeto.
 
 
 
+11 - Habilitar o projeto como Eureka Client:
+    Na classe principal PagamentosApplication, é necessário aplicar a anotação @EnableEurekaClient. Essa anotação serve
+    para a IDE identificar que é um cliente e vai se registrar em algum Eureka.
+    Em seguida, também é necessário configurar o application.properties, definindo o nome do microsserviço pagamento e
+    qual url na qual o Eureka está recebendo as requisições:
+        spring.application.name=pagamentos-ms
+        eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
+
+    Por fim, vamos deixar que o Eureka controle em qual porta que ele vai subir o serviço. Para não nos preocuparmos
+    mais com isso, visto que teremos um catálogo e chamaremos os serviços pelo nome. Para isso, usaremos o atributo
+    server.port=0.
+
+    Subindo a aplicação, já é possível identificar na url do Eureka o microsserviço de pagamento rodando. Nota-se que a ele
+    foi atribuída uma URL que deverá ser usada inclusive para fazer as novas requisições.
+
+
+
+
+12 - Criar o próximo Microsserviço - Pedidos:
+    Um novo projeto foi criado, para comandar todos os pedidos. Esse projeto também receberá as configurações do Eureka
+    e subirá exatamente como o de pagamentos.
+
+
+
+
+13 - Configurar o gateway:
+
+
 
 
 

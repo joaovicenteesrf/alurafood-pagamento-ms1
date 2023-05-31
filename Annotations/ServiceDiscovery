@@ -1,0 +1,35 @@
+Service Discovery é um "catálogo" com todos os endereços, ou instâncias, de todos os microsserviços que estiverem
+registrados nele.
+Dessa forma, toda vez que chega uma requisição, ela é distribuída para o microsserviço correto.
+
+Trabalhar com uma arquitetura de microsserviços tem seus desafios, pois as instâncias dos serviços muitas vezes tem
+suas URLs geradas dinamicamente, podendo ser alteradas o tempo inteiro, inclusive por conta de atualizações ou autoscaling,
+ que é o escalonamento automático, de acordo com a necessidade. Por conta disso, é necessário que o código do cliente
+ “descubra” também de forma dinâmica quais os endereços disponíveis das instâncias dos serviços com os quais ele deseja
+ se comunicar. A isso, damos o nome de service discovery.
+
+O serviço de descoberta acontece basicamente em duas etapas. Na primeira, é necessário ter um serviço ou mecanismo
+onde cada instância faça o seu registro. Na segunda, é necessário que exista uma forma para que esse serviço seja
+localizado por outro serviço (que podemos chamar de “cliente” ou “consumidor”).
+
+Para essa primeira etapa, que damos o nome de service registry, onde será gerado uma espécie de catálogo com todas as
+URLs dos endereços dos serviços e suas instâncias, usaremos o Eureka Server, que faz parte do pacote Spring Cloud Netflix.
+
+Para que esse serviço conheça as nossas instâncias, utiliza-se um padrão chamado self registration, onde cada instância
+deverá se auto-registrar no servidor. É o que veremos no próximo vídeo, onde usaremos o Eureka Client para que o
+microsserviço de pagamentos seja registrado e possa ser localizado pelo nome.
+
+Existe também a possibilidade de aplicações de terceiros fazerem esse registro.
+
+Podemos dizer que existem dois padrões principais de service discovery: client-side (descoberta do lado cliente) e
+server-side (descoberta do lado servidor).
+
+No client-side discovery, o cliente (no caso o microsserviço ou o API Gateway) consulta o service registry, obtém a
+lista de instâncias do serviço que ele quer consumir e ele próprio é responsável por fazer o balanceamento de carga,
+escolhendo para qual instância irá direcionar a requisição (quando houver mais de uma instância do serviço que ele
+precisa consumir registrada). Veremos isso na aula em que abordo sobre balanceamento de carga.
+
+No server-side discovery ao invés do cliente consultar diretamente o service registry, é feita uma solicitação para uma
+camada intermediária como um DNS ou roteador, por exemplo, que faz a consulta ao service registry e o load balancing
+(balanceamento de carga), já encaminhando a requisição a uma das instâncias, garantindo que nenhum servidor seja
+sobrecarregado e desacoplando essa lógica do cliente.
