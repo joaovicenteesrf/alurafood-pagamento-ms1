@@ -158,8 +158,7 @@ Aqui será mostrado o passo a passo da criação do projeto.
     português, balanceamento de carga).
 
     Podemos subir várias instâncias de um serviço e a cada requisição ele vai direcionar efetuando um balanceamento
-    dessa carga. Testaremos isso agora, vamos parar o serviço de pedidos no projeto, por exemplo. Para isso usamos o
-    atalho do teclado "Ctrl + F2".
+    dessa carga.
 
     Vamos ter que identificar as instâncias por algum identificador único, para conseguirmos subir mais de uma
     instância e ele detectar que isso está acontecendo. Tem uma propriedade do Spring que podemos incluir no
@@ -190,20 +189,23 @@ Aqui será mostrado o passo a passo da criação do projeto.
 
 
 
+15 - Realizar a configuração Síncrona utilizando Spring Feign:
+    O Open Feign do Spring Cloud é utilizado para conseguir projetar a comunicação síncrona entre microsserviços.
+    Para isso é necessário adicionar a dependência correta no POM e uma anotação na classe principal "@EnableFeignClients".
+    Nesse projeto, temos um microsserviço de pedido e um de pagamento. Quando o pagamento for confirmado, precisamos enviar
+    uma mensagem para o microsserviço de pedido indicando que está pago. Para fazer isso, no microsserviço de pedido
+    precisamos de um método no controlador que receba essa requisição.
+
+
+
+16 - Implementar Circuit Breaker:
+    O circuit breaker interrompe o chamado a um serviço quando as requisições com falha de comunicação atingirem um número
+    específico.
 
 
 
 
+17 - Definir um Fallback:
+    O fallback é um "plano B", a forma que o microsserviço tratará a falha de comunicação, ou seja, é uma estratégia
+    para que a inoperabilidade de um serviço não afete o outro.
 
-    Camadas:
-
-    Controller
-        |
-        |
-    Service
-        |
-        |
-    Repository
-        |
-        |
-    Model // DTO
