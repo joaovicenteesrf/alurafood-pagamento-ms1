@@ -1,0 +1,32 @@
+O Spring Cloud Gateway é um componente da estrutura Spring Cloud que oferece uma maneira flexível e poderosa de rotear
+e filtrar solicitações HTTP. Ele funciona como uma camada intermediária entre os clientes e os serviços back-end,
+permitindo que você controle o roteamento e aplique lógica personalizada para processar as solicitações antes de
+enviá-las aos serviços.
+
+Aqui está uma visão geral básica de como o Spring Cloud Gateway funciona:
+
+1 - Roteamento: O Spring Cloud Gateway permite definir rotas para direcionar solicitações HTTP para serviços específicos.
+As rotas são configuradas usando um arquivo de configuração ou programaticamente por meio de código Java. Cada rota
+consiste em um padrão de correspondência de URL e o URI do serviço de destino.
+
+2 - Manipulação de solicitações: O Gateway permite que você execute várias operações nas solicitações antes de enviá-las
+aos serviços. Isso inclui a capacidade de adicionar ou remover cabeçalhos, alterar o método HTTP, modificar o corpo da
+solicitação e muito mais. Essas manipulações podem ser realizadas por meio de filtros, que são componentes configuráveis
+que operam na solicitação ou resposta HTTP.
+
+3 - Roteamento dinâmico: O Spring Cloud Gateway suporta roteamento dinâmico, o que significa que você pode atualizar as
+rotas sem precisar reiniciar o gateway. Isso é útil quando você deseja adicionar, remover ou alterar rotas sem
+interromper o serviço.
+
+4 - Balanceamento de carga: O Gateway também suporta balanceamento de carga entre vários instâncias de um serviço.
+Isso significa que, se houver várias instâncias do mesmo serviço em execução, o Gateway poderá distribuir as solicitações
+entre elas de maneira equilibrada.
+
+5 - Integração com o ecossistema Spring: O Spring Cloud Gateway é projetado para ser integrado perfeitamente com outras
+bibliotecas e componentes do ecossistema Spring, como o Spring Boot e o Spring Cloud Discovery. Isso facilita a construção
+de aplicativos em nuvem completos usando o Spring.
+
+Em resumo, o Spring Cloud Gateway fornece um mecanismo flexível para rotear e filtrar solicitações HTTP, permitindo que
+você implemente facilmente recursos avançados, como autenticação, autorização, limitação de taxa e muito mais. Ele é
+altamente configurável e escalável, tornando-se uma escolha popular para o desenvolvimento de gateways de API em arquiteturas
+baseadas em microsserviços.

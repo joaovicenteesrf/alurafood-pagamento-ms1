@@ -133,6 +133,60 @@ Aqui será mostrado o passo a passo da criação do projeto.
 
 
 13 - Configurar o gateway:
+    O gateway é importante pois sem ele devemos sempre listar em qual endereço cada um dos microsserviços está, sempre de maneira
+    manual. Com um gateway, esse endereçamento é feito automaticamente e nas requisições deve ser passado apenas o
+    endereço do gateway.
+    Um projeto spring para o gateway foi configurado da mesma maneira que o server, apontado para a porta 8082 e em seguida
+    ele subiu como um cliente Eureka.
+    Após ele ter subido, a maneira de fazer as requisições muda.
+    A partir de agora, apontaremos o endereço localhost com a porta do GATEWAY, em seguida mencionando o microsserviço
+    como está no eureka, e em seguida a URL da controller.
+    Ex: http://localhost:8082/pedidos-ms/pedidos
+    Note que não é mais endereçar manualmente as url's passadas pelo Eureka.
+    Obs: O gateway em Spring também atua como LoadBalancer.
+
+
+
+
+14 - Configurar o LoadBalancer:
+    Um dos motivadores para decompor uma aplicação em microsserviços é poder fazer a escalabilidade horizontal apenas
+    de uma determinada parte da aplicação. Por exemplo, a black friday que queremos escalar somente o microsserviço de
+    pedidos, visto que estamos esperando o aumento das requisições.
+
+    É comum fazermos isso e subirmos várias instâncias daquele mesmo serviço, que é o que chamamos escalabilidade
+    horizontal. Para fazermos isso, o gateway do Spring faz esse papel também, esse Server Load Balancing (ou em
+    português, balanceamento de carga).
+
+    Podemos subir várias instâncias de um serviço e a cada requisição ele vai direcionar efetuando um balanceamento
+    dessa carga. Testaremos isso agora, vamos parar o serviço de pedidos no projeto, por exemplo. Para isso usamos o
+    atalho do teclado "Ctrl + F2".
+
+    Vamos ter que identificar as instâncias por algum identificador único, para conseguirmos subir mais de uma
+    instância e ele detectar que isso está acontecendo. Tem uma propriedade do Spring que podemos incluir no
+    application.properties do microsserviço de pedidos, que é o ID da instância.
+
+    Para definirmos o identificador único de uma instância, vamos inserir como variáveis de ambiente o nome da
+    aplicação,spring.application.name, e em seguida, solicitaremos para gerar um valor aleatório inteiro, random.int.
+
+    eureka.instance.instance-id=${spring.application.name}:${random.int}
+
+    Ao subir a instância ele vai identificar pelo nome "pedidos-ms" e vai gerar um número aleatório. Para conferirmos
+    se ele está distribuindo as requisições, incluiremos um método no controlador, em "src > main > java > controller",
+    no arquivo PedidoController.
+
+    O método vai ser o @GetMapping("/porta"), logo, quando fazermos a requisição e colocarmos "/pedidos/porta" ele
+    devolve em qual porta está rodando essa instância. O método vai retornar uma string, com uma anotação @Value para
+    ele atribuir o valor que passarmos na porta para a variável porta.
+
+    Dentro dos parênteses passaremos a variável de ambiente, ("${local.server.port}") para uma variável chamada
+    "String porta". Agora vamos retornar uma mensagem informando em qual porta está rodando essa instância, com
+    return String.format.
+
+    Em seguida, identificar por essa variável local.server.port qual a porta que está rodando o serviço que foi chamado.
+
+
+    Uma nova requisição foi feita em pedidos, para mostrar a porta que o loadBalancer está jogando.
+
 
 
 
