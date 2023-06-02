@@ -196,16 +196,73 @@ Aqui será mostrado o passo a passo da criação do projeto.
     uma mensagem para o microsserviço de pedido indicando que está pago. Para fazer isso, no microsserviço de pedido
     precisamos de um método no controlador que receba essa requisição.
 
+    O método que fará isso está definido na interface PedidoClient. Lá será definido o tipo de requisição e a url a ser chamada.
+
+    No microsserviço de PAGAMENTOS há as requisições de cadastrar e listar pagamentos. No JSON passado no corpo da requisição,
+    um dos atributos é o "pedidoId". Esse id associa o pagamento ao seu respectivo pedido. Quando o pagamento for feito, automaticamente
+    deverá ser alterado o status do pedido para "PAGO".
+
+    Controller de Pagamentos "confirmarPagamento" --> PedidoClient "atualizaPagamento"
+
+    O client de pedido implementado no microsserviço de pagamentos será o responsável por fazer a comunicação entre os dois serviços.
 
 
 16 - Implementar Circuit Breaker:
     O circuit breaker interrompe o chamado a um serviço quando as requisições com falha de comunicação atingirem um número
     específico.
+    Ele tem basicamente 3 estados:
+    - Fechado: quando todos os sistemas estão operando perfeitamente.
+    - Aberto: quando para de tentar realizar comunicações com outros serviços. Nesse momento o fallback entra em ação (explicação abaixo).
+    - Semi-aberto: depois de um tempo aberto (definido via configuração), ele volta a esse estado e tenta fazer novas chamadas.
+      Se houver sucesso, volta para o estado fechado.
 
+    Para fazer isso basta incluir as dependências no POM e as configurações no application.properties.
 
+    Cada método que vai se comunicar com algum serviço, podemos nomear com nome de instância e ter comportamentos
+    diferentes. Por exemplo, ao tentarmos nos comunicar com pagamento, o nome vai ser "atualiza pagamento" e teremos
+    configurações específicas para esse método.
+
+    Ao tentarmos nos comunicar com o restaurante, utilizaremos outro nome de instância daquele circuit breaker. Para
+    isso podemos ter configurações diferenciadas para esse circuit breaker também.
+
+    A seguir, precisamos indicar nas propriedades do projeto quais as configurações que queremos usar para uma determinada
+    instância. Todas essas instâncias ficarão na PagamentoController, com a anotação @CircuitBreaker.
+
+    As configs do application.properties são essas:
+
+    resilience4j.circuitbreaker.instances.atualizaPedido.slidingWindowSize: 3
+    resilience4j.circuitbreaker.instances.atualizaPedido.minimumNumberOfCalls: 2
+    resilience4j.circuitbreaker.instances.atualizaPedido.waitDurationInOpenState: 50s
+
+    A slidingWindowSize indica com quantas requisições que faremos uma estatística, para saber se ele pode passar para
+    o estado aberto ou para o fechado. Definimos baseado nas últimas requisições que vamos considerar no momento de fazer estatística.
+
+    O minimumNumberOfCalls indica qual o número mínimo de chamadas que temos que fazer até o circuit breaker entrar em
+    ação. No caso, ele vai tentar fazer a requisição uma, duas e na terceira vez o circuit breaker informar que o estado
+    passou para aberto e que não será realizado mais requisições.
+
+    O waitDurationInOpenState é o tempo que vai ser mantido no estado de aberto, configuramos por 50 segundos, visto
+    que o teste vai ser rápido. Mas você pode incluir o tempo que considerar necessário para a sua aplicação.
+
+    Vamos deixar em estado aberto, sem deixar a requisição se repetir e após os 50 segundos, ele passa para o estado
+    de semiaberto. Subiremos a aplicação novamente e faremos o teste do comportamento no Postman.
+
+    Para testar, basta derrubar a instância de pedidos e fazer a requisição PATCH de confirmar pedidos manualmente. Caso não haja um fallback,
+    ele dará erro.
 
 
 17 - Definir um Fallback:
     O fallback é um "plano B", a forma que o microsserviço tratará a falha de comunicação, ou seja, é uma estratégia
     para que a inoperabilidade de um serviço não afete o outro.
 
+    Caso o serviço de pedidos esteja fora do ar, o comportamento definido é de alterar o status do pagamento para
+    "PAGO_EM_PROCESSAMENTO", e que será atualizado em breve. Como implementar isso?
+
+    - Adicionar o novo status "PAGO_EM_PROCESSAMENTO" ao enum de status disponíveis em PAGAMENTO.
+    - Indicar na controller que tem o método sinalizado como CircuitBreaker qual é o fallbackMethod.
+    - Implementar o método fallback que irá fazer a alteração desse status.
+
+    Ou seja, foi incluído um método fallback com a mesma assinatura do método original que confirma o pagamento, o método
+    fallback chama a service, alterando o status para o "plano b".
+
+    Quando a aplicação subir e uma nova requisição for feita, o status será passado para o "plano A", como deveria ser originalmente.
